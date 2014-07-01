@@ -1,0 +1,21 @@
+never ltl_0 {    /* !((! ((! ((P[2]@ch_id))) U ((P[1]@ch_id)))) || ((! ((P[2]@cs))) U ((P[1]@cs)))) */
+T0_init:
+	if
+	:: (! (((P[1]@cs))) && ((P[1]@ch_id))) -> goto accept_S4
+	:: (! ((! ((P[2]@cs)))) && ! (((P[1]@cs))) && ((P[1]@ch_id))) -> goto accept_all
+	:: ((! ((P[2]@ch_id))) && ! (((P[1]@cs)))) -> goto T0_init
+	:: ((! ((P[2]@ch_id))) && ! ((! ((P[2]@cs)))) && ! (((P[1]@cs)))) -> goto T0_S13
+	fi;
+accept_S4:
+	if
+	:: (! (((P[1]@cs)))) -> goto accept_S4
+	:: (! ((! ((P[2]@cs)))) && ! (((P[1]@cs)))) -> goto accept_all
+	fi;
+T0_S13:
+	if
+	:: (((P[1]@ch_id))) -> goto accept_all
+	:: ((! ((P[2]@ch_id)))) -> goto T0_S13
+	fi;
+accept_all:
+	skip
+}

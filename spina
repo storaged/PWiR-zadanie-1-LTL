@@ -1,0 +1,12 @@
+spin -a $1
+if [ $? -eq 0 ];
+then
+  rm $1.trail
+  # safety i reach sa dla optymalizacji czasu; bfs szuka jak najkrótszych kontrprzykładów
+   gcc -DSAFETY -DREACH -DBFS -o pan pan.c
+   ./pan -E -I
+   if [ -e $1.trail ];
+   then
+      spin -t -p $1
+   fi
+fi
